@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSME Training Registration Portal</title>
+    <style>
+        :root {
+            --msme-blue: #003366; 
+            --msme-gold: #ffcc00; 
+            --gov-gray: rgba(248, 249, 250, 0.9);
+            --border-color: #ced4da;
+        }
+
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: #333;
+            background-image: url('bg_msme.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .gov-top-bar {
+            background: white;
+            padding: 10px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--msme-gold);
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box img {
+            height: 70px; 
+        }
+
+        .logo-text-side {
+            line-height: 1.2;
+            color: var(--msme-blue);
+        }
+
+        header {
+            background-color: var(--msme-blue);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header h1 { margin: 0; font-size: 22px; }
+
+        .form-container { 
+            background: rgba(255, 255, 255, 0.95); 
+            max-width: 850px; 
+            margin: 30px auto; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3); 
+            padding: 40px; 
+            border-radius: 8px;
+        }
+
+        .required-text { 
+            color: #d93025; 
+            font-size: 13px; 
+            background: #fff3f3;
+            padding: 8px;
+            border-left: 4px solid #d93025;
+            margin-bottom: 25px;
+        }
+
+        .form-section { 
+            margin-bottom: 25px; 
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            font-size: 14px; 
+            color: var(--msme-blue);
+            text-transform: uppercase;
+        }
+
+        .star { color: #d93025; }
+
+        input[type="text"], input[type="email"], input[type="date"], select {
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .file-box { 
+            background-color: #fcfcfc; 
+            padding: 15px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .submit-btn { 
+            background-color: var(--msme-blue); 
+            color: white; 
+            padding: 15px 40px; 
+            border: none; 
+            border-radius: 4px;
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold; 
+            display: block;
+            margin: 20px auto;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover { 
+            background-color: #ce7b00;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: white;
+            background: rgba(0, 51, 102, 0.8);
+            margin-top: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .grid-row { display: flex; gap: 20px; }
+            .grid-item { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="gov-top-bar">
+    <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/150px-Emblem_of_India.svg.png" alt="Emblem of India">
+        <div class="logo-text-side">
+            <strong>सत्यमेव जयते</strong><br>
+            <small>Government of India</small>
+        </div>
+    </div>
+    <div class="logo-box">
+        <img src="msme_tech_logo.jpg" alt="Development Commissionerate MSME">
+    </div>
+</div>
+
+<header>
+    <h1>Skill Development & Training Application</h1>
+</header>
+
+<div class="form-container">
+    <p class="required-text">MSME TECHNOLOGY CENTER BHIWADI</p>
+
+    <form name="google-sheet">
+        <div class="form-section">
+            <div class="grid-row">
+                <div class="grid-item">
+                    <label>Email <span class="star">*</span></label>
+                    <input type="email" name="email" placeholder="official@example.com" required>
+                </div>
+                <div class="grid-item">
+                    <label>COURSE NAME <span class="star">*</span></label>
+                    <select name="course" required>
+                        <option value="">-- Choose Course --</option>
+                        <option>AutoCAD</option> <option>AutoCAD (CIVIL)</option> <option>SOLIDWORKS</option>
+                        <option>ANSYS</option> <option>CNC PROGRAMMING-LATHE/MILLING</option> <option>AUTOTRONICS ENGINEERING</option>
+                        <option>AUTOMATION SYSTEM</option> <option>PLC PROGRAMMING</option> <option>SCADA</option>
+                        <option>C++ PROGRAMMING</option> <option>PYTHON PROGRAMMING</option> <option>BASIC PNEUMATICS</option>
+                        <option>BASIC HYDRAULICS</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>NAME OF YOUR INSTITUTION / COLLEGE (Write Full Name) <span class="star">*</span></label>
+            <input type="text" name="college" required>
+        </div>
+
+        <div class="form-section">
+            <div class="grid-row">
+                <div class="grid-item">
+                    <label>APPLICANT NAME <span class="star">*</span></label>
+                    <input type="text" name="applicant_name" required>
+                </div>
+                <div class="grid-item">
+                    <label>FATHER'S NAME <span class="star">*</span></label>
+                    <input type="text" name="father_name" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="grid-row">
+                <div class="grid-item">
+                    <label>DATE OF BIRTH <span class="star">*</span></label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div class="grid-item">
+                    <label>MOBILE NUMBER (WhatsApp) <span class="star">*</span></label>
+                    <input type="text" name="mobile" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="grid-row">
+                <div class="grid-item">
+                    <label>NAME OF CITY/VILLAGE <span class="star">*</span></label>
+                    <input type="text" name="city" required>
+                </div>
+                <div class="grid-item">
+                    <label>DISTRICT <span class="star">*</span></label>
+                    <input type="text" name="district" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="grid-row">
+                <div class="grid-item">
+                    <label>STATE (राज्य) <span class="star">*</span></label>
+                    <input type="text" name="state" required>
+                </div>
+                <div class="grid-item">
+                    <label>AADHAR CARD NO. <span class="star">*</span></label>
+                    <input type="text" name="aadhar_no" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>UTR NUMBER (Fees Payment Image) <span class="star">*</span></label>
+            <input type="text" name="utr_number" required>
+        </div>
+
+        <div class="form-section">
+            <div class="grid-row">
+                <div class="grid-item">
+                    <label>QUALIFICATION <span class="star">*</span></label>
+                    <select name="qualification" required>
+                        <option value="">-- Choose Qualification --</option>
+                        <option>10th</option> <option>12th</option> <option>ITI</option>
+                        <option>DIPLOMA</option> <option>DEGREE</option> <option>POST GRADUATE</option>
+                    </select>
+                </div>
+                <div class="grid-item">
+                    <label>GENDER <span class="star">*</span></label>
+                    <select name="gender" required>
+                        <option value="">-- Choose Gender --</option>
+                        <option>Female</option> <option>Male</option> <option>Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+<div class="form-section">
+            <label>10th Marksheet <span class="star">*</span></label>
+            <div class="file-box">
+                <input type="file" name="10th_marksheet" required>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload 1 supported file. Max 10 MB.</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>12th/Recent Semester Marksheet <span class="star">*</span></label>
+            <div class="file-box">
+                <input type="file" name="12th_marksheet" required>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload 1 supported file. Max 10 MB.</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>AADHAR CARD (Front Side) <span class="star">*</span></label>
+            <div class="file-box">
+                <input type="file" name="aadhar_front" required>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload 1 supported file. Max 10 MB.</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>AADHAR CARD (Back Side) <span class="star">*</span></label>
+            <div class="file-box">
+                <input type="file" name="aadhar_back" required>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload 1 supported file. Max 10 MB.</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>CANDIDATE PHOTO <span class="star">*</span></label>
+            <div class="file-box">
+                <input type="file" name="candidate_photo" accept="image/*" required>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload 1 supported file: image. Max 10 MB. (Please upload visible Passport Size photograph)</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <label>INTERNSHIP REQUEST LETTER</label>
+            <div class="file-box">
+                <input type="file" name="internship_letter" accept="application/pdf,image/*">
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload 1 supported file: PDF or image. Max 10 MB.</p>
+            </div>
+        </div>
+</div>
+         
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Finalize & Submit Application</button>
+    </form>
+</div>
+
+<footer>
+    &copy; 2026 Ministry of Micro, Small & Medium Enterprises (MSME). All Rights Reserved.
+</footer>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzktMXmK4d5WxwZG1fYi0xmelYz5NLkQxA2S0j5nydyEMRqSb3taJxBROTVJXUk9KnGzw/exec'; // Apna Deploy URL yahan dalein
+  const form = document.forms['google-sheet'];
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.innerHTML = "Submitting... Please wait";
+
+    const formData = new FormData(form);
+    const data = {};
+
+    // Text fields
+    formData.forEach((value, key) => {
+      if (!(value instanceof File)) data[key] = value;
+    });
+
+    // Files handling
+    const fileFields = [
+      { id: '10th_marksheet', d: 'm10Data', n: 'm10Name' },
+      { id: '12th_marksheet', d: 'm12Data', n: 'm12Name' },
+      { id: 'aadhar_front', d: 'afData', n: 'afName' },
+      { id: 'aadhar_back', d: 'abData', n: 'abName' },
+      { id: 'candidate_photo', d: 'cpData', n: 'cpName' },
+      { id: 'internship_letter', d: 'ilData', n: 'ilName' }
+    ];
+
+    const readFile = (file) => new Promise((resolve) => {
+      if (!file || file.size === 0) resolve(null);
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
+
+    for (const f of fileFields) {
+      const file = formData.get(f.id);
+      if (file && file.size > 0) {
+        data[f.d] = await readFile(file);
+        data[f.n] = file.name;
+      }
+    }
+
+    fetch(scriptURL, { 
+      method: 'POST', 
+      body: new URLSearchParams(data),
+      header: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(res => {
+      alert("Success! Your application has been submitted.");
+      form.reset();
+      btn.disabled = false;
+      btn.innerHTML = "Finalize & Submit Application";
+    })
+    .catch(err => {
+      alert("Error! Please try again.");
+      console.error(err);
+      btn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>
