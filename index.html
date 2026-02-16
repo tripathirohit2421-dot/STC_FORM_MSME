@@ -347,20 +347,33 @@
 <footer>
     &copy; 2026 Ministry of Micro, Small & Medium Enterprises (MSME). All Rights Reserved.
 </footer>
-<script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzktMXmK4d5WxwZG1fYi0xmelYz5NLkQxA2S0j5nydyEMRqSb3taJxBROTVJXUk9KnGzw/exec'; // Apna Deploy URL yahan dalein
+ <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzktMXmK4d5WxwZG1fYi0xmelYz5NLkQxA2S0j5nydyEMRqSb3taJxBROTVJXUk9KnGzw/exec'; 
   const form = document.forms['google-sheet'];
   const btn = document.getElementById('submitBtn');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // --- PAYMENT VALIDATION START ---
+    // 1. UTR Number Check
+    const utrInput = document.getElementById('utr_field');
+    const utrValue = utrInput ? utrInput.value.trim() : "";
+
+    if (utrValue.length < 12) {
+      alert("Kripya valid 12-digit UTR Number enter karein.");
+      utrInput.focus();
+      return; // Form submit nahi hoga
+    }
+    // --- PAYMENT VALIDATION END ---
+
     btn.disabled = true;
     btn.innerHTML = "Submitting... Please wait";
 
     const formData = new FormData(form);
     const data = {};
 
-    // Text fields
+    // Text fields (including UTR)
     formData.forEach((value, key) => {
       if (!(value instanceof File)) data[key] = value;
     });
@@ -383,10 +396,14 @@
     });
 
     for (const f of fileFields) {
-      const file = formData.get(f.id);
-      if (file && file.size > 0) {
-        data[f.d] = await readFile(file);
-        data[f.n] = file.name;
+      const file = formData.get(f.id); // Input name ya id se file lein
+      // Agar aapne ID alag rakhi hai toh document.getElementById use karein
+      const fileInput = document.getElementsByName(f.id)[0]; 
+      
+      if (fileInput && fileInput.files[0]) {
+        const actualFile = fileInput.files[0];
+        data[f.d] = await readFile(actualFile);
+        data[f.n] = actualFile.name;
       }
     }
 
@@ -405,12 +422,14 @@
       alert("Error! Please try again.");
       console.error(err);
       btn.disabled = false;
+      btn.innerHTML = "Finalize & Submit Application";
     });
   });
 </script>
 </body>
 
 </html>
+
 
 
 
