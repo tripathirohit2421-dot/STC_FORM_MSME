@@ -272,6 +272,13 @@
     <label>UTR NUMBER (Fees Payment Image) <span class="star">*</span></label>
     <input type="text" id="utr_field" name="utr_number" placeholder="Enter 12 digit UTR Number" required>
 </div>
+       <div class="form-section">
+    <label>UPLOAD PAYMENT SCREENSHOT (QR Code Payment Proof) <span class="star">*</span></label>
+    <div class="file-box">
+        <input type="file" name="payment_screenshot" id="payment_screenshot" accept="image/*" required>
+        <p style="font-size: 12px; color: #666; margin-top: 5px;">Upload payment screenshot (JPG/PNG). Max 10 MB.</p>
+    </div>
+</div>
 
         <div class="form-section">
             <div class="grid-row">
@@ -355,17 +362,26 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // --- PAYMENT VALIDATION START ---
-    // 1. UTR Number Check
+    // --- PAYMENT & SCREENSHOT VALIDATION START ---
     const utrInput = document.getElementById('utr_field');
+    const screenShotInput = document.getElementById('payment_screenshot'); // Naya Screenshot field
+    
     const utrValue = utrInput ? utrInput.value.trim() : "";
 
+    // 1. UTR Length Check
     if (utrValue.length < 12) {
       alert("Kripya valid 12-digit UTR Number enter karein.");
       utrInput.focus();
-      return; // Form submit nahi hoga
+      return; 
     }
-    // --- PAYMENT VALIDATION END ---
+
+    // 2. Screenshot Check (Required validation)
+    if (!screenShotInput || screenShotInput.files.length === 0) {
+      alert("Kripya payment ka screenshot upload karein.");
+      screenShotInput.focus();
+      return;
+    }
+    // --- VALIDATION END ---
 
     btn.disabled = true;
     btn.innerHTML = "Submitting... Please wait";
@@ -378,14 +394,15 @@
       if (!(value instanceof File)) data[key] = value;
     });
 
-    // Files handling
+    // Files handling (Yahan screenshot add kar diya hai)
     const fileFields = [
       { id: '10th_marksheet', d: 'm10Data', n: 'm10Name' },
       { id: '12th_marksheet', d: 'm12Data', n: 'm12Name' },
       { id: 'aadhar_front', d: 'afData', n: 'afName' },
       { id: 'aadhar_back', d: 'abData', n: 'abName' },
       { id: 'candidate_photo', d: 'cpData', n: 'cpName' },
-      { id: 'internship_letter', d: 'ilData', n: 'ilName' }
+      { id: 'internship_letter', d: 'ilData', n: 'ilName' },
+      { id: 'payment_screenshot', d: 'payData', n: 'payName' } // Naya field Google Sheet ke liye
     ];
 
     const readFile = (file) => new Promise((resolve) => {
@@ -396,9 +413,8 @@
     });
 
     for (const f of fileFields) {
-      const file = formData.get(f.id); // Input name ya id se file lein
-      // Agar aapne ID alag rakhi hai toh document.getElementById use karein
-      const fileInput = document.getElementsByName(f.id)[0]; 
+      // Input name ya ID se file dhoondhna
+      const fileInput = document.getElementById(f.id) || document.getElementsByName(f.id)[0];
       
       if (fileInput && fileInput.files[0]) {
         const actualFile = fileInput.files[0];
@@ -413,7 +429,7 @@
       header: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(res => {
-      alert("Success! Your application has been submitted.");
+      alert("Success! Your application and payment screenshot have been submitted.");
       form.reset();
       btn.disabled = false;
       btn.innerHTML = "Finalize & Submit Application";
@@ -429,6 +445,7 @@
 </body>
 
 </html>
+
 
 
 
