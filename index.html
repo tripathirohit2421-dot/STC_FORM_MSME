@@ -369,7 +369,7 @@
     const utrValue = utrInput ? utrInput.value.trim() : "";
 
     // 1. UTR Length Check
-    if (utrValue.length < 12) {
+    if (utrValue.length <= 12) {
       alert("Kripya valid 12-digit UTR Number enter karein.");
       utrInput.focus();
       return; 
@@ -445,6 +445,7 @@
 </body>
 
 </html>
+
 
 
 
